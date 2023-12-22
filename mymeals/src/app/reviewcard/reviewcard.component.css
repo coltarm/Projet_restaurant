@@ -1,0 +1,25 @@
+div.reviewcard {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    width: 80%;
+    height: 80px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10%;
+}
+
+/* app-reviewcard {
+    justify-content: center;
+    margin-top: 20px;
+    width: 80%;
+    height: 80px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10%;
+} */
+
+/* Le div.reviewcard est dans l'élément app-reviewcard
+que je ne sais pas comment sélectionnor. donc le 80% de largeur
+est très petit et c'est pas exactement centré. */
