@@ -36,9 +36,9 @@ const startApplication = async () => {
         res.json(User);
     });
 
-    app.get("/commentary:username", async (req,res)=> {
-        const user = req.params.username;
-        const commentary = await user.find({username:user},{username : 1, Comments : 1}).toArray();
+    app.get("/commentary/:username", async (req,res)=> {
+        const User = req.params.username;
+        const commentary = await user.find({username:User},{username : 1, Comments : 1, projection: { password: 0 }}).toArray();
         res.json(commentary);
 
     })
