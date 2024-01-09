@@ -36,6 +36,13 @@ const startApplication = async () => {
         res.json(User);
     });
 
+    app.get("/commentary:username", async (req,res)=> {
+        const user = req.params.username;
+        const commentary = await user.find({username:user},{username : 1, Comments : 1}).toArray();
+        res.json(commentary);
+
+    })
+
     app.listen(port, () => {
       console.log(`Serveur lancé sur http://localhost:${port}`);
     });
