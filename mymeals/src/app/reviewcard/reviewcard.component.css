@@ -2,12 +2,59 @@ div.reviewcard {
     display:flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 20px;
-    width: 80%;
+    margin-top: 10px;
+    padding: 1px;
     height: 80px;
     border-style: solid;
     border-width: 3px;
     border-radius: 10%;
+    border-color: #e9574c;
+}
+
+div.rcDiv {
+    min-width: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+div.head {
+    min-width: 50px;
+    max-width: 300px;
+    background-color: red;
+}
+
+p.meal {
+    min-width: 50px;
+    max-width: 300px;
+    background-color: blue;
+}
+
+div.commDiv {
+    margin-left:3px;
+    margin-right:3px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10%;
+    border-color: #7aaf55;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+p.comm {
+    min-width: 50px;
+    max-width: 500px;
+}
+
+p.note {
+    min-width: 50px;
+    background-color: purple;
+}
+
+div.rcDiv p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
 }
 
 /* app-reviewcard {
@@ -20,6 +67,5 @@ div.reviewcard {
     border-radius: 10%;
 } */
 
-/* Le div.reviewcard est dans l'élément app-reviewcard
-que je ne sais pas comment sélectionnor. donc le 80% de largeur
-est très petit et c'est pas exactement centré. */
+/* Le div.reviewcard est dans l'élément app-reviewcard que je ne
+sais pas comment sélectionnor. donc le 80% de largeur est très petit. */
