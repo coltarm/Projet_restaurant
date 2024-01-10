@@ -1,48 +1,40 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+// Exemple d'appel API avec Fetch
 
-main().catch(err => console.log(err));
+const apiUrl = 'http://localhost:3000/commentary';
 
-async function main() {
-  await mongoose.connect(process.env.MONG_URL);
+// Configuration de la requête
+const requestOptions = {
+  method: 'POST',
+  body: JSON.stringify({
+    username: 'Vasino',
+    rest_name: '3 Brasseurs',
+    city: 'Annecy',
+    price: 12.8,
+    public: true,
+    rating: 2.5,
+    commentary: "ahhhhhhhhhhhhhhhhhhhhhhhhhhhf",
+  }),
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+};
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-  const useSchema = new Schema({
-    id : ObjectId("id_user"),
-    username : String,
-    email: String,
-    password: Buffer,
-    comments: [{
-       id_rest : ObjectId("id_restaurant"),
-        commentary : String, 
-        date_visite: Date,
-        date_publication: Date,
-        price: Number,
-        public: Boolean,
-        note : Number
-      }],
-    
+// Effectuer la requête avec Fetch
+fetch(apiUrl, requestOptions)
+  .then(response => {
+    // Vérifier si la requête a réussi (statut HTTP 2xx)
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+    // Convertir la réponse en JSON
+    return response.json();
   })
+  .catch(error => {
+    // Gérer les erreurs
+    console.error('Erreur lors de la requête API:', error);
+  });
 
-  const restSchema = new Schema({
-    _id: ObjectId("id_restaurant"),
-    name: String,
-    email: String,
-    telephone_number: String,
-    note_res : Number,
-    adress: {country: String,
-            city: String,
-            street: String,
-            number:String,
-            },
-    comments:[{
-      id_user : ObjectId("id_user"),
-      commentary : String,
-      date_visite: Date,
-      date_publication : Date,
-      price : Number,
-      note : Number
-    }]
 
-  })
-}
+  db.users.aggregate([{ $unwind: '$Comments' },{ $match: { 'Comments.public': true } }])
+  

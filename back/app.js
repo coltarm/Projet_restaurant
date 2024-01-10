@@ -13,6 +13,7 @@ const startApplication = async () => {
     const restaurant = database.collection("restaurants");
 
     const app = express();
+    app.use(express.json());
 
     app.get("/", async (req, res) => {
       try {
@@ -44,11 +45,24 @@ const startApplication = async () => {
 
     });
 
+    app.get("/search/:restaurant", async (req, res) =>{
+        const restaurant = req.params.restaurant;
+        const comment_rest = user.find({$or : [{nom : { $regex: restaurant, options : "i"}}, {adress : {city : {$regex : restaurant, $options : "i"}}}]}).toArray();
+        res.json(comment_rest);
+
+    });
+
+    app.get("/commentary", async (req, res) => {
+        const all_commentary = await user.aggregate([{ $unwind: '$Comments' },{ $match: { 'Comments.public': true } }]).toArray();
+        res.json(all_commentary);
+    });
+
  
 
     app.post("/commentary", async (req,res)=> {
+        console.log("body = ",req.body)
         const username = req.body.username;
-        const rest_name = req.body.password;
+        const rest_name = req.body.rest_name;
         const city = req.body.city;
         const price = req.body.price;
         const public = req.body.public;
@@ -64,10 +78,19 @@ const startApplication = async () => {
             res.status(500).send("pas d'utilisateur portant ce nom");
             return;
         }
-        await users.updateOne({username : username}, {$push : {Comments : {nom : rest_name, ville : city, commentary:commentary, date : new Date(), price: price, public: public, note: rating}}});
-        res.send("Le commentaire à bien été ajouté");
+        const update = await user.updateOne({username : username}, {$push : {Comments : {nom : rest_name, ville : city, commentary:commentary, date : new Date(), price: price, public: public, note: rating}}});
+        if(update.modifiedCount === 1){
+            res.status(200).send("Le commentaire à bien été ajouté");
+            
+        }
+        else{
+            res.status(200).send("Le commentaire n'a pas été ajouté à la bdd");
+        }
+        
 
     });
+
+    
 
 
 
