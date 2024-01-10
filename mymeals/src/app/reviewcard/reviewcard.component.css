@@ -20,13 +20,17 @@ div.rcDiv {
 div.head {
     min-width: 50px;
     max-width: 300px;
-    background-color: red;
+    border-right-style:dashed;
+    border-right-width:1px;
 }
 
-p.meal {
+p.name {
+    font-size:22px;
+}
+
+div.infos {
     min-width: 50px;
     max-width: 300px;
-    background-color: blue;
 }
 
 div.commDiv {
@@ -47,7 +51,6 @@ p.comm {
 
 p.note {
     min-width: 50px;
-    background-color: purple;
 }
 
 div.rcDiv p {
