@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ReviewcardComponent } from '../reviewcard/reviewcard.component';
@@ -13,23 +14,21 @@ import { ReviewcardComponent } from '../reviewcard/reviewcard.component';
 })
 export class UserlistComponent {
 
-  request_url = 'http://localhost:3000/commentary/Sauval'
+  request_url = 'http://localhost:3000/commentary/' //Sauval ou Vasino
+  username: string = "";
   dataRes: any;
   reviewList: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get(this.request_url).subscribe((data: any) => {
-      this.dataRes = data;
-      this.reviewList = this.dataRes.Comments;
-    });
+    this.route.params.subscribe(params => {
+      this.username = this.route.snapshot.paramMap.get('username')!;
+      this.http.get(this.request_url + this.username).subscribe((data: any) => {
+        this.dataRes = data;
+        this.reviewList = this.dataRes.Comments;
+    })});
 
-    /*
-    for (let i = 0; i < 4; i++) {
-      this.reviewList.push(i);
-    }
-    */
   }
 
 }

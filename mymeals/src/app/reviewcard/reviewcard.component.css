@@ -7,7 +7,7 @@ div.reviewcard {
     height: 80px;
     border-style: solid;
     border-width: 3px;
-    border-radius: 10%;
+    border-radius: 15px / 10px;
     border-color: #e9574c;
 }
 
@@ -38,7 +38,7 @@ div.commDiv {
     margin-right:3px;
     border-style: solid;
     border-width: 2px;
-    border-radius: 10%;
+    border-radius: 5px;
     border-color: #7aaf55;
     padding-left: 0px;
     padding-right: 0px;
